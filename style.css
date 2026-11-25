@@ -1,0 +1,1148 @@
+:root {
+  --bg-page: #f6f4ef;
+  --bg-surface: #ffffff;
+  --bg-subtle: #efece4;
+  --ink-primary: #1c242b;
+  --ink-secondary: #52606d;
+  --ink-muted: #7b8794;
+  --border-color: #dcd6c8;
+
+  /* Aksen Semantik Trigonometri */
+  --color-primary: #1b4965;
+  --color-primary-hover: #13354a;
+  --color-sin: #0f766e;
+  --color-sin-bg: #e6f4f1;
+  --color-cos: #be123c;
+  --color-cos-bg: #fce8ed;
+  --color-tan: #b45309;
+  --color-tan-bg: #fef3c7;
+  --color-recip: #4338ca;
+
+  --shadow-sm: 0 2px 6px rgba(28, 36, 43, 0.05);
+  --shadow-md: 0 8px 24px rgba(28, 36, 43, 0.08);
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--ink-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.material-symbols-outlined {
+  font-size: 20px;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* =========================================================
+   TIPOGRAFI MATEMATIKA NATURAL (PECAHAN VERTIKAL & AKAR)
+   ========================================================= */
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  margin: 0 3px;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+.frac .num {
+  padding: 0 4px 2px;
+  border-bottom: 1.5px solid currentColor;
+  display: block;
+  text-align: center;
+}
+
+.frac .den {
+  padding: 2px 4px 0;
+  display: block;
+  text-align: center;
+}
+
+.sqrt {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.sqrt-symbol {
+  font-weight: 700;
+  margin-right: 1px;
+}
+
+.sqrt-radicand {
+  border-top: 1.5px solid currentColor;
+  padding: 0 2px;
+  line-height: 1.15;
+}
+
+.math-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.app-shell {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 20px 24px 36px;
+}
+
+/* Kepala Halaman & Navigasi */
+.top-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 24px;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--color-primary);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.brand-badge .material-symbols-outlined {
+  font-size: 26px;
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+}
+
+h1 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.28rem;
+  font-weight: 600;
+  color: var(--ink-primary);
+}
+
+h3 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  font-size: 0.88rem;
+  color: var(--ink-secondary);
+  margin-top: 2px;
+}
+
+.tab-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: var(--bg-subtle);
+  padding: 6px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+}
+
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink-secondary);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: var(--ink-primary);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.tab-btn.active {
+  background: var(--bg-surface);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* Kartu Dasar */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* Tata Letak Tab 1 */
+.lab-grid {
+  display: grid;
+  grid-template-columns: 1.65fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.canvas-stage {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.canvas-box {
+  background: #fcfbf8;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.canvas-tag {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-secondary);
+  padding-bottom: 8px;
+  margin-bottom: 6px;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.canvas-tag select {
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--ink-primary);
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  touch-action: none;
+}
+
+#unitCircleCanvas {
+  cursor: grab;
+}
+
+#unitCircleCanvas:active {
+  cursor: grabbing;
+}
+
+/* Tombol & Input Kontrol */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--bg-subtle);
+  color: var(--ink-primary);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: #e5e0d4;
+}
+
+.pill-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.select-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 0.84rem;
+}
+
+.select-wrap select {
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-weight: 600;
+  color: var(--ink-primary);
+  outline: none;
+}
+
+/* Deck Kontrol Sudut */
+.control-deck {
+  background: var(--bg-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  border: 1px solid var(--border-color);
+}
+
+.slider-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.slider-label-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stepper-group {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 2px;
+}
+
+.stepper-group input {
+  width: 58px;
+  border: none;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink-primary);
+  outline: none;
+}
+
+.unit-suffix {
+  padding-right: 6px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+
+.icon-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink-primary);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: var(--bg-subtle);
+}
+
+.range-mode-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.toggle-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  cursor: pointer;
+}
+
+.main-slider {
+  width: 100%;
+  accent-color: var(--color-primary);
+  height: 6px;
+  cursor: pointer;
+  margin-bottom: 14px;
+}
+
+.layer-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.layer-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink-secondary);
+  margin-right: 4px;
+}
+
+.layer-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+
+.layer-pill input {
+  accent-color: var(--color-primary);
+}
+
+.layer-pill .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.sin-pill .dot { background: var(--color-sin); }
+.cos-pill .dot { background: var(--color-cos); }
+.tan-pill .dot { background: var(--color-tan); }
+.tri-pill .dot { background: var(--color-primary); }
+.sec-pill .dot { background: var(--color-recip); }
+
+.special-angles-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
+.special-angles-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.angle-chip {
+  padding: 4px 9px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.angle-chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.angle-chip.active {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+}
+
+/* Kolom Kanan: Informasi Matematis */
+.info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.readout-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.meta-label {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+}
+
+.angle-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+#disp-deg {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+
+.divider {
+  color: var(--border-color);
+}
+
+#disp-rad {
+  font-size: 1.05rem;
+}
+
+.quadrant-badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #e3eef6;
+  color: var(--color-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.coord-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--bg-subtle);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.quadrant-desc {
+  font-size: 0.85rem;
+  color: var(--ink-secondary);
+}
+
+/* Rasio Trigonometri */
+.ratio-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ratio-item {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #faf9f6;
+  border: 1px solid var(--border-color);
+  border-left-width: 4px;
+}
+
+.sin-border { border-left-color: var(--color-sin); }
+.cos-border { border-left-color: var(--color-cos); }
+.tan-border { border-left-color: var(--color-tan); }
+
+.ratio-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.ratio-name {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-weight: 700;
+  font-size: 0.94rem;
+}
+
+.ratio-name small {
+  font-weight: 500;
+  color: var(--ink-muted);
+  font-size: 0.78rem;
+}
+
+.ratio-exact {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+
+.ratio-sub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--ink-secondary);
+}
+
+.sign-tag {
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.sign-tag.pos {
+  background: var(--color-sin-bg);
+  color: var(--color-sin);
+}
+
+.sign-tag.neg {
+  background: var(--color-cos-bg);
+  color: var(--color-cos);
+}
+
+.sign-tag.zero {
+  background: var(--bg-subtle);
+  color: var(--ink-secondary);
+}
+
+.reciprocal-box {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border-color);
+}
+
+.reciprocal-box.hidden {
+  display: none;
+}
+
+.reciprocal-box h4 {
+  font-size: 0.82rem;
+  color: var(--color-recip);
+  margin-bottom: 8px;
+}
+
+.recip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.recip-cell {
+  background: #f3f4ff;
+  border: 1px solid #d7dafc;
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+}
+
+.recip-formula {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--ink-secondary);
+  margin-bottom: 4px;
+}
+
+.recip-cell strong {
+  font-size: 0.9rem;
+  color: var(--color-recip);
+}
+
+/* Tabel Matriks Tanda */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: 8px 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.data-table th:first-child,
+.data-table td:first-child {
+  text-align: left;
+}
+
+.data-table th {
+  background: var(--bg-subtle);
+  font-weight: 700;
+  color: var(--ink-secondary);
+}
+
+.data-table tr.active-row {
+  background: #e8f1f8;
+}
+
+.data-table td.pos {
+  font-weight: 700;
+  color: var(--color-sin);
+}
+
+.data-table td.neg {
+  font-weight: 700;
+  color: var(--color-cos);
+}
+
+/* Panel 2: Sudut Berelasi */
+.relasi-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 20px;
+}
+
+.badge-outline {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: 0.84rem;
+}
+
+.relasi-highlight {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.rel-stat {
+  background: var(--bg-subtle);
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid var(--border-color);
+}
+
+.big-stat {
+  display: block;
+  font-size: 1.35rem;
+  color: var(--color-primary);
+  margin: 4px 0;
+}
+
+.formal-steps {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 0.9rem;
+}
+
+.formal-steps li {
+  background: #faf9f6;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.step-calc-line {
+  margin-top: 6px;
+  padding: 6px 10px;
+  background: var(--bg-subtle);
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+}
+
+.identity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.identity-box {
+  background: #faf9f6;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.id-title {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--ink-secondary);
+  margin-bottom: 6px;
+}
+
+.id-eq {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.id-calc {
+  font-size: 0.86rem;
+  color: var(--ink-primary);
+  background: var(--bg-subtle);
+  padding: 10px 12px;
+  border-radius: 8px;
+  line-height: 1.75;
+}
+
+/* Panel 3: Evaluasi Pemahaman */
+.eval-layout {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.eval-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.form-select,
+.form-input {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--ink-primary);
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.status-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #eef5fa;
+  border: 1px solid #c6ddef;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  margin-bottom: 18px;
+}
+
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.question-card {
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 16px 18px;
+  background: #fcfbf9;
+}
+
+.q-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.q-number {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-primary);
+}
+
+.q-topic {
+  font-size: 0.76rem;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  color: var(--ink-secondary);
+  font-weight: 600;
+}
+
+.q-prompt {
+  font-size: 0.96rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--ink-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  background: #f2f7fb;
+}
+
+.option-btn.correct {
+  background: var(--color-sin-bg);
+  border-color: var(--color-sin);
+  color: #0b4f4a;
+  font-weight: 600;
+}
+
+.option-btn.wrong {
+  background: var(--color-cos-bg);
+  border-color: var(--color-cos);
+  color: #881337;
+}
+
+.opt-letter {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.q-explanation {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--bg-subtle);
+  font-size: 0.88rem;
+  color: var(--ink-primary);
+  border-left: 3.5px solid var(--color-primary);
+}
+
+.q-explanation.hidden {
+  display: none;
+}
+
+.exp-steps {
+  margin-top: 8px;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.eval-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.score-card {
+  text-align: center;
+}
+
+.score-circle {
+  width: 112px;
+  height: 112px;
+  margin: 12px auto;
+  border-radius: 50%;
+  border: 6px solid var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f5f9fc;
+}
+
+#score-value {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+.score-feedback {
+  font-size: 0.85rem;
+  color: var(--ink-secondary);
+}
+
+.engine-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.engine-head h3 {
+  margin-bottom: 0;
+}
+
+.small-note {
+  font-size: 0.82rem;
+  color: var(--ink-secondary);
+  margin-bottom: 12px;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-secondary);
+  margin-bottom: 4px;
+}
+
+.api-details {
+  font-size: 0.82rem;
+  color: var(--ink-secondary);
+}
+
+.api-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.api-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 6px;
+}
+
+.app-footer {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+@media (max-width: 1080px) {
+  .lab-grid,
+  .eval-layout,
+  .relasi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .canvas-stage,
+  .options-grid,
+  .relasi-highlight {
+    grid-template-columns: 1fr;
+  }
+}

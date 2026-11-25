@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laboratorium Interaktif Roda &amp; Grafik Trigonometri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400..600,0..1,0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Kepala Halaman -->
+    <header class="top-header">
+      <div class="brand-group">
+        <div class="brand-badge" aria-hidden="true">
+          <span class="material-symbols-outlined">compass_calibration</span>
+        </div>
+        <div>
+          <p class="eyebrow">Media Pembelajaran Matematika Interaktif</p>
+          <h1>Laboratorium Roda &amp; Grafik Trigonometri</h1>
+        </div>
+      </div>
+
+      <nav class="tab-nav" role="tablist" aria-label="Navigasi Modul Pembelajaran">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="lab">
+          <span class="material-symbols-outlined">track_changes</span>
+          <span>Simulasi Roda &amp; Grafik</span>
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="relasi">
+          <span class="material-symbols-outlined">transform</span>
+          <span>Sudut Berelasi &amp; Identitas</span>
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="evaluasi">
+          <span class="material-symbols-outlined">quiz</span>
+          <span>Evaluasi Pemahaman</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Konten Utama -->
+    <main class="main-content">
+      <!-- PANEL 1: SIMULASI RODA & GRAFIK -->
+      <section id="tab-lab" class="tab-panel active" role="tabpanel">
+        <div class="lab-grid">
+          <!-- Kolom Kiri: Kanvas Visualisasi -->
+          <div class="visual-column">
+            <div class="card visual-card">
+              <div class="card-header">
+                <div>
+                  <h2>Lingkaran Satuan &amp; Proyeksi Gelombang</h2>
+                  <p class="subtitle">Seret titik <strong>P(x, y)</strong> pada keliling lingkaran atau gunakan pengatur sudut di bawah.</p>
+                </div>
+                <div class="pill-controls">
+                  <button id="btn-play" class="btn btn-secondary" title="Jalankan atau hentikan rotasi sudut otomatis">
+                    <span class="material-symbols-outlined" id="icon-play">play_arrow</span>
+                    <span id="label-play">Putar Otomatis</span>
+                  </button>
+                  <label class="select-wrap" title="Kecepatan rotasi animasi">
+                    <span class="material-symbols-outlined">speed</span>
+                    <select id="select-speed" aria-label="Kecepatan Rotasi">
+                      <option value="0.4">0,5x</option>
+                      <option value="0.9" selected>1,0x</option>
+                      <option value="1.8">2,0x</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Kanvas Ganda: Lingkaran Satuan + Proyeksi Kurva -->
+              <div class="canvas-stage">
+                <div class="canvas-box unit-box">
+                  <div class="canvas-tag">Roda Trigonometri (r = 1)</div>
+                  <canvas id="unitCircleCanvas" width="430" height="430"></canvas>
+                </div>
+                <div class="canvas-box wave-box">
+                  <div class="canvas-tag">
+                    <span>Proyeksi Grafik Fungsi:</span>
+                    <select id="select-wave-func" aria-label="Pilih Fungsi Grafik">
+                      <option value="all">Semua (sin, cos, tan)</option>
+                      <option value="sin" selected>y = sin(θ) — Proyeksi Vertikal</option>
+                      <option value="cos">y = cos(θ) — Proyeksi Horizontal</option>
+                      <option value="tan">y = tan(θ) — Garis Singgung</option>
+                    </select>
+                  </div>
+                  <canvas id="waveCanvas" width="520" height="430"></canvas>
+                </div>
+              </div>
+
+              <!-- Pengatur Sudut & Tampilan Lapisan -->
+              <div class="control-deck">
+                <div class="slider-row">
+                  <div class="slider-label-group">
+                    <label for="angleSlider"><strong>Besar Sudut (θ):</strong></label>
+                    <div class="stepper-group">
+                      <button id="btn-dec" class="icon-btn" title="Kurangi 1 derajat" aria-label="Kurangi 1 derajat">
+                        <span class="material-symbols-outlined">remove</span>
+                      </button>
+                      <input type="number" id="angleInput" min="-180" max="720" step="1" value="30" aria-label="Input nilai derajat" />
+                      <span class="unit-suffix">°</span>
+                      <button id="btn-inc" class="icon-btn" title="Tambah 1 derajat" aria-label="Tambah 1 derajat">
+                        <span class="material-symbols-outlined">add</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="range-mode-group">
+                    <label class="toggle-chip">
+                      <input type="checkbox" id="chk-extended" />
+                      <span>Rentang Lanjutan (-180° s.d. 720°)</span>
+                    </label>
+                    <label class="toggle-chip">
+                      <input type="checkbox" id="chk-snap" checked />
+                      <span>Kunci Sudut Istimewa</span>
+                    </label>
+                  </div>
+                </div>
+
+                <input type="range" id="angleSlider" min="0" max="360" step="1" value="30" class="main-slider" />
+
+                <!-- Lapisan Visual -->
+                <div class="layer-toggles">
+                  <span class="layer-title">Komponen Visual:</span>
+                  <label class="layer-pill sin-pill">
+                    <input type="checkbox" id="layer-sin" checked />
+                    <span class="dot"></span>
+                    <span>sin(θ) — Sisi Depan</span>
+                  </label>
+                  <label class="layer-pill cos-pill">
+                    <input type="checkbox" id="layer-cos" checked />
+                    <span class="dot"></span>
+                    <span>cos(θ) — Sisi Samping</span>
+                  </label>
+                  <label class="layer-pill tan-pill">
+                    <input type="checkbox" id="layer-tan" checked />
+                    <span class="dot"></span>
+                    <span>tan(θ) — Garis Singgung</span>
+                  </label>
+                  <label class="layer-pill tri-pill">
+                    <input type="checkbox" id="layer-triangle" checked />
+                    <span class="dot"></span>
+                    <span>Segitiga Siku-Siku</span>
+                  </label>
+                  <label class="layer-pill sec-pill">
+                    <input type="checkbox" id="layer-reciprocal" />
+                    <span class="dot"></span>
+                    <span>Rasio Kebalikan (sec, csc, cot)</span>
+                  </label>
+                </div>
+
+                <!-- Tombol Cepat Sudut Istimewa -->
+                <div class="special-angles-wrap">
+                  <span class="layer-title">Sudut Istimewa:</span>
+                  <div id="specialAnglesBar" class="special-angles-bar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kolom Kanan: Analisis Matematis Real-Time -->
+          <aside class="info-column">
+            <!-- Kartu Koordinat & Kuadran -->
+            <div class="card readout-card">
+              <div class="readout-top">
+                <div>
+                  <span class="meta-label">Sudut Standar</span>
+                  <div class="angle-display">
+                    <span id="disp-deg">30°</span>
+                    <span class="divider">|</span>
+                    <span id="disp-rad" class="math-inline"></span>
+                  </div>
+                </div>
+                <div id="quadrant-badge" class="quadrant-badge">Kuadran I</div>
+              </div>
+
+              <div class="coord-banner">
+                <span class="material-symbols-outlined">my_location</span>
+                <span>Koordinat Titik P(cos θ, sin θ) = <strong id="disp-coord" class="mono">(0,866 ; 0,500)</strong></span>
+              </div>
+
+              <p id="quadrant-desc" class="quadrant-desc">
+                Pada Kuadran I (0° &lt; θ &lt; 90°), absis (x) dan ordinat (y) bernilai positif sehingga seluruh perbandingan trigonometri bernilai positif.
+              </p>
+            </div>
+
+            <!-- Kartu Nilai Perbandingan Trigonometri Utama -->
+            <div class="card ratios-card">
+              <h3>Nilai Perbandingan Utama</h3>
+              <div class="ratio-list">
+                <div class="ratio-item sin-border">
+                  <div class="ratio-head">
+                    <span class="ratio-name">
+                      sin(θ) =
+                      <span class="frac"><span class="num">y</span><span class="den">r</span></span>
+                      <small>(Depan per Miring)</small>
+                    </span>
+                    <span id="val-sin-exact" class="ratio-exact"></span>
+                  </div>
+                  <div class="ratio-sub">
+                    <span>Desimal: <strong id="val-sin-dec" class="mono">0,5000</strong></span>
+                    <span id="sign-sin" class="sign-tag pos">Positif (+)</span>
+                  </div>
+                </div>
+
+                <div class="ratio-item cos-border">
+                  <div class="ratio-head">
+                    <span class="ratio-name">
+                      cos(θ) =
+                      <span class="frac"><span class="num">x</span><span class="den">r</span></span>
+                      <small>(Samping per Miring)</small>
+                    </span>
+                    <span id="val-cos-exact" class="ratio-exact"></span>
+                  </div>
+                  <div class="ratio-sub">
+                    <span>Desimal: <strong id="val-cos-dec" class="mono">0,8660</strong></span>
+                    <span id="sign-cos" class="sign-tag pos">Positif (+)</span>
+                  </div>
+                </div>
+
+                <div class="ratio-item tan-border">
+                  <div class="ratio-head">
+                    <span class="ratio-name">
+                      tan(θ) =
+                      <span class="frac"><span class="num">y</span><span class="den">x</span></span>
+                      <small>(Depan per Samping)</small>
+                    </span>
+                    <span id="val-tan-exact" class="ratio-exact"></span>
+                  </div>
+                  <div class="ratio-sub">
+                    <span>Desimal: <strong id="val-tan-dec" class="mono">0,5774</strong></span>
+                    <span id="sign-tan" class="sign-tag pos">Positif (+)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Rasio Kebalikan (Opsional) -->
+              <div id="reciprocal-box" class="reciprocal-box hidden">
+                <h4>Perbandingan Kebalikan (Reciprocal)</h4>
+                <div class="recip-grid">
+                  <div class="recip-cell">
+                    <span class="recip-formula">csc(θ) = <span class="frac"><span class="num">1</span><span class="den">sin(θ)</span></span></span>
+                    <strong id="val-csc"></strong>
+                  </div>
+                  <div class="recip-cell">
+                    <span class="recip-formula">sec(θ) = <span class="frac"><span class="num">1</span><span class="den">cos(θ)</span></span></span>
+                    <strong id="val-sec"></strong>
+                  </div>
+                  <div class="recip-cell">
+                    <span class="recip-formula">cot(θ) = <span class="frac"><span class="num">1</span><span class="den">tan(θ)</span></span></span>
+                    <strong id="val-cot"></strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ringkasan Aturan Tanda Kuadran -->
+            <div class="card sign-matrix-card">
+              <h3>Matriks Tanda per Kuadran</h3>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Kuadran</th>
+                    <th>Rentang</th>
+                    <th>sin</th>
+                    <th>cos</th>
+                    <th>tan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-q="1">
+                    <td><strong>Kuadran I</strong></td>
+                    <td>0° – 90°</td>
+                    <td class="pos">+</td>
+                    <td class="pos">+</td>
+                    <td class="pos">+</td>
+                  </tr>
+                  <tr data-q="2">
+                    <td><strong>Kuadran II</strong></td>
+                    <td>90° – 180°</td>
+                    <td class="pos">+</td>
+                    <td class="neg">−</td>
+                    <td class="neg">−</td>
+                  </tr>
+                  <tr data-q="3">
+                    <td><strong>Kuadran III</strong></td>
+                    <td>180° – 270°</td>
+                    <td class="neg">−</td>
+                    <td class="neg">−</td>
+                    <td class="pos">+</td>
+                  </tr>
+                  <tr data-q="4">
+                    <td><strong>Kuadran IV</strong></td>
+                    <td>270° – 360°</td>
+                    <td class="neg">−</td>
+                    <td class="pos">+</td>
+                    <td class="neg">−</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- PANEL 2: SUDUT BERELASI & IDENTITAS -->
+      <section id="tab-relasi" class="tab-panel" role="tabpanel">
+        <div class="relasi-grid">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2>Analisis Sudut Referensi &amp; Sudut Berelasi</h2>
+                <p class="subtitle">Penjabaran konkret cara mereduksi sudut pada Kuadran II, III, dan IV menjadi sudut lancip α di Kuadran I.</p>
+              </div>
+              <span class="badge-outline">Sudut Aktif: <strong id="rel-active-deg">30°</strong></span>
+            </div>
+
+            <div class="relasi-highlight">
+              <div class="rel-stat">
+                <span class="meta-label">Sudut Referensi Lancip (α)</span>
+                <strong id="rel-ref-angle" class="big-stat">30°</strong>
+                <small>Selisih sudut terdekat terhadap sumbu-X</small>
+              </div>
+              <div class="rel-stat">
+                <span class="meta-label">Bentuk Relasi Sumbu-X</span>
+                <strong id="rel-formula-x" class="big-stat">θ = α</strong>
+                <small id="rel-explain-x">Sudut berada langsung di Kuadran I</small>
+              </div>
+            </div>
+
+            <div class="step-breakdown">
+              <h3>Penjabaran Langkah demi Langkah Secara Konkret</h3>
+              <ol id="rel-steps-list" class="formal-steps"></ol>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Pembuktian Numerik Identitas Trigonometri</h2>
+            <p class="subtitle">Perhitungan substitusi nilai langsung berdasarkan sudut yang sedang aktif pada roda satuan.</p>
+
+            <div class="identity-list">
+              <div class="identity-box">
+                <div class="id-title">1. Identitas Pythagoras Utama</div>
+                <div class="id-eq">sin<sup>2</sup>(θ) + cos<sup>2</sup>(θ) = 1</div>
+                <div id="id-pythagoras-calc" class="id-calc"></div>
+              </div>
+
+              <div class="identity-box">
+                <div class="id-title">2. Identitas Perbandingan Tangen</div>
+                <div class="id-eq">
+                  tan(θ) =
+                  <span class="frac"><span class="num">sin(θ)</span><span class="den">cos(θ)</span></span>
+                </div>
+                <div id="id-tan-calc" class="id-calc"></div>
+              </div>
+
+              <div class="identity-box">
+                <div class="id-title">3. Identitas Sudut Negatif (Simetri Sumbu-X)</div>
+                <div class="id-eq">sin(−θ) = −sin(θ) &nbsp;|&nbsp; cos(−θ) = cos(θ)</div>
+                <div id="id-neg-calc" class="id-calc"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANEL 3: EVALUASI PEMAHAMAN (LATIHAN ADAPTIF) -->
+      <section id="tab-evaluasi" class="tab-panel" role="tabpanel">
+        <div class="eval-layout">
+          <div class="card eval-main-card">
+            <div class="card-header">
+              <div>
+                <h2>Evaluasi Pemahaman Trigonometri</h2>
+                <p class="subtitle">Setiap butir soal dilengkapi pembahasan bertahap dengan penulisan pecahan dan akar yang jelas.</p>
+              </div>
+              <div class="eval-actions">
+                <select id="select-difficulty" class="form-select" aria-label="Tingkat Kesulitan Soal">
+                  <option value="dasar">Tingkat Dasar (Sudut Istimewa)</option>
+                  <option value="menengah" selected>Tingkat Menengah (Kuadran &amp; Relasi)</option>
+                  <option value="lanjut">Tingkat Lanjut (Aplikasi &amp; Identitas)</option>
+                </select>
+                <button id="btn-reshuffle" class="btn btn-primary">
+                  <span class="material-symbols-outlined">shuffle</span>
+                  <span>Acak Ulang Paket Soal</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Indikator Status Pembuatan Soal -->
+            <div id="quiz-status-bar" class="status-banner">
+              <span class="material-symbols-outlined">info</span>
+              <span id="quiz-status-text">Menampilkan paket soal standar (5 butir soal). Tekan "Acak Ulang Paket Soal" untuk mendapatkan variasi soal baru.</span>
+            </div>
+
+            <!-- Kontainer Soal Aktif -->
+            <div id="quiz-container" class="quiz-container"></div>
+          </div>
+
+          <!-- Panel Samping: Skor & Pengaturan Mesin Penyusun Soal -->
+          <aside class="eval-side">
+            <div class="card score-card">
+              <h3>Rekapitulasi Skor</h3>
+              <div class="score-circle">
+                <span id="score-value">0</span>
+                <small id="score-total">/ 5</small>
+              </div>
+              <p id="score-feedback" class="score-feedback">Silakan kerjakan butir soal di samping untuk melihat evaluasi hasil belajar Anda.</p>
+            </div>
+
+            <div class="card engine-card">
+              <div class="engine-head">
+                <span class="material-symbols-outlined">tune</span>
+                <h3>Konfigurasi Generator Soal</h3>
+              </div>
+              <p class="small-note">Sistem mendukung pembuatan variasi soal otomatis melalui layanan model bahasa eksternal maupun bank soal algoritmik luring.</p>
+
+              <label class="field-label" for="select-provider">Penyedia Layanan Generator:</label>
+              <select id="select-provider" class="form-select full-width">
+                <option value="groq" selected>Groq API (Respon Cepat)</option>
+                <option value="gemini">Google Gemini API</option>
+                <option value="local">Generator Algoritmik Lokal (Luring)</option>
+              </select>
+
+              <details class="api-details">
+                <summary>Kredensial API Terkonfigurasi</summary>
+                <div class="api-fields">
+                  <label class="field-label" for="input-groq-key">Kunci API Groq:</label>
+                  <input type="password" id="input-groq-key" class="form-input mono" />
+
+                  <label class="field-label" for="input-gemini-key">Kunci API Google:</label>
+                  <input type="password" id="input-gemini-key" class="form-input mono" />
+                </div>
+              </details>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <span>Media Pembelajaran Matematika — Materi Perbandingan &amp; Fungsi Trigonometri</span>
+      <span>Gunakan titik seret pada lingkaran satuan untuk eksplorasi langsung</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
